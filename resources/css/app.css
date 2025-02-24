@@ -1,0 +1,42 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* ページ全体の高さを確保 */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* 縦方向にレイアウト */
+    min-height: 100vh; /* ビューポート全体の高さを確保 */
+}
+
+main {
+    flex: 1; /* コンテンツを残りのスペースに広げる */
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%; /* ページ幅いっぱいに広げる */
+}
+
+#rating {
+    direction: rtl; /* 右から左に並べる */
+    unicode-bidi: bidi-override; /* 順序を強制的に逆に */
+}
+#rating > input {
+    display: none; /* ラジオボタンを非表示 */
+}
+#rating > label {
+    font-size: 2rem;
+    color: #ccc; /* デフォルトの色 */
+    cursor: pointer;
+}
+#rating > input:checked ~ label {
+    color: #ffc107; /* チェックされたスターの色 */
+}
+#rating > input:hover ~ label {
+    color: #ffdb70; /* ホバーしたスターの色 */
+}
