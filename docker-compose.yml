@@ -3,9 +3,9 @@ services:
         build:
             context: './vendor/laravel/sail/runtimes/8.4'
             dockerfile: Dockerfile
-            args:
+            args:   
                 WWWGROUP: '${WWWGROUP}'
-        image: 'sail-8.4/app'
+        image: 'sail-8.4/app'   
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -21,8 +21,9 @@ services:
             - '.:/var/www/html'
         networks:
             - sail
-        depends_on:
+        depends_on:   
             - mysql
+
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -45,11 +46,11 @@ services:
                 - mysqladmin
                 - ping
                 - '-p${DB_PASSWORD}'
-            retries: 3
-            timeout: 5s
+
 networks:
-    sail:
-        driver: bridge
+  sail:
+    driver: bridge
+
 volumes:
-    sail-mysql:
-        driver: local
+  sail-mysql:
+    driver: local
