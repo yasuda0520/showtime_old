@@ -10,8 +10,9 @@ class MovieController extends Controller
     // 映画一覧を表示
     public function index()
     {
-        $movies = Movie::whereNull('deleted_at')->get(); // 論理削除されていないものだけ取得
-        return view('movies.index', compact('movies'));
+        // 削除済みでない作品だけ取得
+        $movies = Movie::whereNull('deleted_at')->get();
+        return view('watchlist.index', compact('movies'));
     }
 
     // 映画登録フォームを表示
@@ -23,16 +24,26 @@ class MovieController extends Controller
     // 映画を保存（登録）
     public function store(Request $request)
     {
+        // バリデーション
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'year' => 'required|integer',
             'description' => 'nullable',
+        ], [
+            'title.required' => 'タイトルを入力してください。',
+            'year.required' => '公開年を入力してください。',
+            'year.integer' => '公開年は数値で入力してください。',
         ]);
 
         // `status` は登録時に設定せず、DB のデフォルト値を使用
-        Movie::create($validatedData);
-
-        return redirect()->route('movies.index')->with('success', '映画を登録しました');
+        Movie::create([
+            'title' => $validatedData['title'],
+            'year' => $validatedData['year'],
+            'description' => $validatedData['description'] ?? null,
+            'status' => '未視聴', // デフォルト値を設定
+        ]);
+        
+        return redirect()->route('home');
     }
 
     // 映画編集フォームを表示
@@ -55,15 +66,16 @@ class MovieController extends Controller
         $movie = Movie::findOrFail($id);
         $movie->update($validatedData);
 
-        return redirect()->route('movies.index')->with('success', '映画情報を更新しました');
+        return redirect()->route('movies.index');
     }
 
     // 映画を論理削除
     public function destroy($id)
     {
         $movie = Movie::findOrFail($id);
-        $movie->update(['deleted_at' => now()]);
-
-        return redirect()->route('movies.index')->with('success', '映画を削除しました');
+        $movie->deleted_at = now();
+        $movie->save();
+        
+        return back();
     }
 }

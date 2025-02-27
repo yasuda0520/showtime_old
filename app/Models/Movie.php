@@ -13,7 +13,7 @@ class Movie extends Model
     protected $table = 'movies';
 
     // `watchlist_added_at` を含むカラムをfillableに追加
-    protected $fillable = ['title', 'description', 'status', 'priority', 'watchlist_added_at'];
+    protected $fillable = ['title', 'description', 'status', 'priority', 'watchlist_added_at', 'deleted_at'];
     
     // `watchlist_added_at` を日時としてキャスト
     protected $casts = [
