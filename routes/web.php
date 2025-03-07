@@ -37,3 +37,6 @@ Route::delete('/watchlist/{id}', [WatchlistController::class, 'removeFromWatchli
 
 // ウォッチリストの更新処理を実行するルート
 Route::put('/watchlist/{id}/update', [WatchlistController::class, 'update'])->name('watchlist.update');
+
+// 視聴済みの映画を表示するページ
+Route::get('/collection', [MovieController::class, 'collection'])->name('movies.collection');
