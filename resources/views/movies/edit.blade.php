@@ -4,7 +4,7 @@
 <div class="container">
     <h1>作品の編集</h1>
 
-    <form action="{{ route('watchlist.update', $movie->id) }}" method="POST">
+    <form method="POST" action="{{ route('movies.update', $movie->id) }}">
         @csrf
         @method('PUT')
 

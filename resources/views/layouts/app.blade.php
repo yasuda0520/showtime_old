@@ -19,7 +19,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">ホーム</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('movies.create') }}">観たい作品を登録</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('watchlist.index') }}">ウォッチリスト</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('movies.index') }}">マイコレクション</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('movies.collection') }}">マイコレクション</a></li>
                 </ul>
             </div>
         </div>

@@ -22,7 +22,7 @@
                             <p class="card-text"><strong>観たい度:</strong> {{ $movie->priority }} ☆</p>
 
                             <!-- ウォッチリストに追加ボタン -->
-                            <form action="{{ route('movies.addToWatchlist', ['id' => $movie->id]) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('movies.watchlist', ['id' => $movie->id]) }}" method="POST" style="display:inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">ウォッチリストに追加</button>
                             </form>
